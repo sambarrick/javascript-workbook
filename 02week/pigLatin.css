@@ -1,0 +1,36 @@
+.container {
+height: 100vh;
+background-image: linear-gradient(rgba(12, 64, 194, 0.968), rgb(28, 136, 213));
+background-repeat: no-repeat;
+margin: 0 auto;
+text-align: center;
+font-family: 'PT Serif', serif;
+}
+
+header {
+    font-size: 30px;
+    margin-top: 2%;
+margin-bottom: 2%;
+}
+
+#name{
+    height: 30px;
+    width: 200px;
+   
+}
+
+button{
+    background-color: transparent;
+    border-color: transparent;
+    outline: none;
+}
+
+#pig{
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+#pig:hover {
+opacity: .7;
+cursor: pointer;
+}
