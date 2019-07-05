@@ -5,22 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./pigLatin.css">
+    <link rel="stylesheet" href="./animate.css">
     <link href="https://fonts.googleapis.com/css?family=PT+Serif&display=swap" rel="stylesheet">
     <title>Pig Latin GUI</title>
 </head>
 
 <body class="container">
 
-<header>
+<header class="animated bounce">
     Pig Latin Translator
 </header>
 
 <main>
-    <input type="text" id="name" placeholder="Enter word to translate"></input>
-    <h2>Click the pig to translate!</h2>
+        <form action="myphp.php" method="post"> 
+        <input type="text" id="name" class="animated fadeInLeft" placeholder="Enter word to translate"></input> <br>
+        <input type="reset" id="reset" class="animated fadeInRight" value="Reset">
+        </form>
+
+    <h2 class="animated bounce">Click the pig to translate!</h2>
 
 
-<button onclick="pigLatin()"> <img src="pig.png" id ="pig" width="150" height="150"> </button>
+<button onclick="pigLatin()"> <img src="pig.png" id ="pig" width="150" height="150"> <button onclick="playMusic()"></button>
+
+<br>
+
+
 <p id="output"></p>
 </main>
 

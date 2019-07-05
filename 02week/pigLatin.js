@@ -32,7 +32,6 @@ function pigLatin() {
   document.getElementById("output").innerHTML = result;
 }
 
-
 // function getPrompt() {
 //   rl.question('word ', (answer) => {
 //     console.log( pigLatin(answer) );
