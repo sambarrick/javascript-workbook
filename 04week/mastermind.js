@@ -22,24 +22,43 @@ function generateSolution() {
     const randomIndex = getRandomInt(0, letters.length);
     solution += letters[randomIndex];
   }
+  return solution;
 }
 
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-function generateHint() {
+function generateHint(guess) {
   // your code here
+const solutionArray = solution.split('');
+const guessArray = guess.split('');
+let correctLetterLocations = 0;
+let correctLetter = 0;
+
+for(var i = 0; i < solutionArray.length; i++){
+
+}
+
 }
 
 function mastermind(guess) {
   solution = 'abcd'; // Comment this out to generate a random solution
   // your code here
+
+solution = generateSolution();
+
+  if(guess === solution){
+    console.log('You guessed it!')
+    return 'You guessed it!'; 
+  } else{
+    return 'Try again';
+  }
+
 }
 
-
 function getPrompt() {
-  rl.question('guess: ', (guess) => {
+  rl.question('guess: ', function(guess) {
     mastermind(guess);
     printBoard();
     getPrompt();
