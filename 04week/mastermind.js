@@ -34,7 +34,7 @@ function generateHint(guess) {
 const solutionArray = solution.split('');
 const guessArray = guess.split('');
 let correctLetterLocations = 0;
-let correctLetter = 0;
+let correctLetter = 00; //take out a zero, just did this so I could push
 
 for(var i = 0; i < solutionArray.length; i++){
 
