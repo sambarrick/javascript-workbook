@@ -15,6 +15,7 @@ function printBoard() {
   for (let i = 0; i < board.length; i++) {
     console.log(board[i]);
   }
+
 }
 
 function generateSolution() {
@@ -22,7 +23,7 @@ function generateSolution() {
     const randomIndex = getRandomInt(0, letters.length);
     solution += letters[randomIndex];
   }
-  return solution;
+
 }
 
 function getRandomInt(min, max) {
@@ -31,13 +32,14 @@ function getRandomInt(min, max) {
 
 function generateHint(guess) {
   // your code here
+guess = '';
 const solutionArray = solution.split('');
 const guessArray = guess.split('');
 let correctLetterLocations = 0;
-let correctLetter = 00; //take out a zero, just did this so I could push
+let correctLetter = 0;
 
 for(var i = 0; i < solutionArray.length; i++){
-
+console.log(solutionArray[i] // --> should compare to guessArray[var I need to create])
 }
 
 }
@@ -46,12 +48,12 @@ function mastermind(guess) {
   solution = 'abcd'; // Comment this out to generate a random solution
   // your code here
 
-solution = generateSolution();
 
   if(guess === solution){
-    console.log('You guessed it!')
+    console.log('You guessed it!');
     return 'You guessed it!'; 
   } else{
+    console.log('Try again');
     return 'Try again';
   }
 
