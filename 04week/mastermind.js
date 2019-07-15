@@ -23,7 +23,6 @@ function generateSolution() {
     const randomIndex = getRandomInt(0, letters.length);
     solution += letters[randomIndex];
   }
-
 }
 
 function getRandomInt(min, max) {
@@ -32,30 +31,47 @@ function getRandomInt(min, max) {
 
 function generateHint(guess) {
   // your code here
-guess = '';
 const solutionArray = solution.split('');
 const guessArray = guess.split('');
 let correctLetterLocations = 0;
-let correctLetter = 0;
+let correctLetters = 0;
+
+// Spec 6
 
 for(var i = 0; i < solutionArray.length; i++){
-console.log(solutionArray[i] // --> should compare to guessArray[var I need to create])
+if(solutionArray[i] === guessArray[i]){
+  correctLetterLocations++;
+  solutionArray[i] = null;
+}
 }
 
+// Spec 7
+
+for(var i = 0; i < solutionArray.length; i++){
+
+  let targetIndex = solutionArray.indexOf(guessArray[i]);
+  if(targetIndex > -1){
+    correctLetters++;
+    solutionArray[targetIndex] = null;
+  }
+}
+  return `${correctLetterLocations}-${correctLetters}`
 }
 
 function mastermind(guess) {
   solution = 'abcd'; // Comment this out to generate a random solution
   // your code here
-
-
+ 
   if(guess === solution){
     console.log('You guessed it!');
     return 'You guessed it!'; 
   } else{
+    const hint = generateHint(guess);
+    board.push(`${guess}-${hint}`);
     console.log('Try again');
     return 'Try again';
   }
+
 
 }
 
