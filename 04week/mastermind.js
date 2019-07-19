@@ -15,7 +15,6 @@ function printBoard() {
   for (let i = 0; i < board.length; i++) {
     console.log(board[i]);
   }
-
 }
 
 function generateSolution() {
@@ -59,10 +58,18 @@ for(var i = 0; i < solutionArray.length; i++){
 }
 
 function mastermind(guess) {
-  solution = 'abcd'; // Comment this out to generate a random solution
+   solution = 'abcd'; // Comment this out to generate a random solution
   // your code here
  
-  if(guess === solution){
+// if(board.length >= 10){
+//   console.log('You ran out of turns! The solution was ');
+//   return 'You ran out of turns! The solution was ';
+// } else {
+//   console.log('Guess again.');
+//  return 'Guess again.'
+// }
+
+  if(guess === solution){ // simple if else to determine who won. Pretty self-explanatory as if the guess is the solution, then you win. If not, guess again
     console.log('You guessed it!');
     return 'You guessed it!'; 
   } else{
@@ -71,8 +78,7 @@ function mastermind(guess) {
     console.log('Try again');
     return 'Try again';
   }
-
-
+  userPlays++;
 }
 
 function getPrompt() {
@@ -82,6 +88,13 @@ function getPrompt() {
     getPrompt();
   });
 }
+
+function gameOver(){
+  if (userPlays == 10){
+    console.log(`game over - the correct solution was ${solution}`);
+    process.exit();
+  }
+} 
 
 // Tests
 
