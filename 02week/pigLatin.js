@@ -9,23 +9,9 @@ const rl = readline.createInterface({
 
 
 function pigLatin(word) {
-  
-  // Your code here
-  word = word.trim().toLowerCase(); 
-  const vowels = ["a", "e", "i", "o", "u"];
-  let vowelIndex = 0;
 
-  if (vowels.includes(word[0])) {
-    return word + "yay";
-  } else {
-    for (let char of word) {
-      if (vowels.includes(char)) {
-        vowelIndex = word.indexOf(char);
-        break;
-      }
-    }
-    return word.slice(vowelIndex) + word.slice(0, vowelIndex) + "ay";
-  }
+  // Your code here
+
 }
 
 
@@ -56,9 +42,6 @@ if (typeof describe === 'function') {
     it('should lowercase and trim word before translation', () => {
       assert.equal(pigLatin('HeLlO '), 'ellohay');
       assert.equal(pigLatin(' RoCkEt'), 'ocketray');
-    
-      
-
     });
   });
 } else {
@@ -66,14 +49,3 @@ if (typeof describe === 'function') {
   getPrompt();
 
 }
-
-/*
-//Add to end of an array
-students.push('Karime');
-console.log(students);
-*/
-
-/*Remove from the front of an array
-students.shift();
-console.log(students);
-*/
