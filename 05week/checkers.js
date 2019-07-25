@@ -13,9 +13,19 @@ function Checker() {
 }
 
 class Board {
-  constructor() {
-    this.grid = []
+  constructor(checkers) {
+    this.grid = [],
+    this.checkers = [],                                         
+    this.createCheckers = [],                                   
+    this.redPiece = 'R';                       
+    this.blackPiece = 'B';
+    this.playerTurn = this.blackPiece;
   }
+
+  
+// -11 11 -9 9 --> one jump
+// -22 22 -18 18 --> 2 jumps
+
   // method that creates an 8x8 array, filled with null values
   createGrid() {
     // loop to create the 8 rows
@@ -38,22 +48,54 @@ class Board {
         // if the location is "truthy" (contains a checker piece, in this case)
         if (this.grid[row][column]) {
           // push the symbol of the check in that location into the array
-          rowOfCheckers.push(this.grid[row][column].symbol);
+          rowOfCheckers.push(this.grid[row][column]);
         } else {
           // just push in a blank space
           rowOfCheckers.push(' ');
         }
       }
+    }
+
+
       // join the rowOfCheckers array to a string, separated by a space
       string += rowOfCheckers.join(' ');
       // add a 'new line'
       string += "\n";
+      console.log(string);
     }
-    console.log(string);
-  }
+    
+
+
+  initializeGrid() {
+      for(let row = 0; row < 3; row++){
+          for(let column = 0; column < 8; column++) {
+              if(column % 2 === 1 && row % 2 === 0){
+                this.grid[row][column] = this.redPiece;
+                this.checkers.push(this.redPiece);
+              }
+              else if(column % 2 === 0 && row % 2 === 1){
+                this.grid[row][column] = this.redPiece;
+                this.checkers.push(this.redPiece);
+              }
+              }
+      }
+    for(let row = 5; row < 8; row++){
+        for(let column = 0; column < 8; column++) {
+            if(column % 2 === 0 && row % 2 === 1){
+              this.grid[row][column] = this.blackPiece;
+              this.checkers.push(this.blackPiece)
+            }
+            else if(column % 2 === 0 && row % 2 === 1){
+              this.grid[row][column] = this.blackPiece;
+              this.checkers.push(this.blackPiece)
+            }
+        }
+    }
+}
+}
 
   // Your code here
-}
+
 
 class Game {
   constructor() {
@@ -61,6 +103,7 @@ class Game {
   }
   start() {
     this.board.createGrid();
+    this.board.initializeGrid();
   }
 }
 
