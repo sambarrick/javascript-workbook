@@ -6,71 +6,56 @@ const rl = readline.createInterface({
 	output: process.stdout
 });
 
-class Checker {
-  // Your code here
-  constructor(color){
-  if(color==='red') {
-    this.color = color;
-    this.symbol = String.fromCharCode(0x125CB);
-  } else
-  if(color==='black'){
-    this.color = color;
-    this.symbol = String.fromCharCode(0x125CF);
-  }
-}
-}
-
-const redChecker = new Checker('red');
-const blackChecker = new Checker('black');
-let playerTurn = blackChecker;
-
-const switchPlayer = () => {
-  if(playerTurn == blackChecker) {
-  playerTurn = redChecker
-} else {
-playerTurn = blackChecker;
-}
-}
-
-
-
 class Board {
 	constructor() {
 		this.grid = [];
 		this.checkers = [];
+		this.redPiece = "X";
+		this.blackPiece = "O";
+		this.playerTrn = this.blackPiece;
 	}
-// is validInput(start, end){
-//   is07 = num => 
-// }
+
 	initializeGrid() {
 		for (let row = 0; row < 3; row++) {
 			for (let column = 0; column < 8; column++) {
 				if (column % 2 === 1 && row % 2 === 0) {
-					this.grid[row][column] = redChecker;
-					this.checkers.push(redChecker);
+					this.grid[row][column] = this.redPiece;
+					this.checkers.push(this.redPiece);
 				} else if (column % 2 === 0 && row % 2 === 1) {
-					this.grid[row][column] = redChecker;
-					this.checkers.push(redChecker);
+					this.grid[row][column] = this.redPiece;
+					this.checkers.push(this.redPiece);
 				}
 			}
-    }
-  
-  
-    
-for (let row0 = 5; row0 < 8; row0++) {
-	  for (let column0 = 0; column0 < 8; column0++) {
-	    if (column0 % 2 === 1 && row0 % 2 === 0) {
-	      this.grid[row0][column0]=blackChecker;
-	      this.checkers.push(blackChecker);
-	    }
-	  else if (column0 % 2 === 0 && row0 % 2 === 1) {
-	      this.grid[row0][column0]=blackChecker;
-	      this.checkers.push(blackChecker);
-	  }
-  }
-  }
-}
-  
+		}
+		for (let row = 5; row < 8; row++) {
+			for (let column = 0; column < 8; column++) {
+				if (column % 2 === 1 && row % 2 === 0) {
+					this.grid[row][column] = this.blackPiece;
+					this.checkers.push(this.blackPiece);
+				} else if (column % 2 === 0 && row % 2 === 1) {
+					this.grid[row][column] = this.blackPiece;
+					this.checkers.push(this.blackPiece);
+				}
+			}
+		}
+	}
+	selectChecker(row, col) {
+		return this.grid[row][col];
+	}
+
+	killChecker(position) {
+		let checker = this.selectChecker(position[0], position[1]);
+		let indexChecker = this.checkers.indexOf(checker);
+		this.checkers.splice(indexChecker, 1);
+
+		this.grid[position[0]][position[1]] = null;
+	}
+
+	// important numbers
+	// 11 -11 9 -9 1 4 jump
+	// -22 22 -18 18 2 jump
+
+	// method that creates an 8x8 array, filled with null values
 	createGrid() {
 		// loop to create the 8 rows
 		for (let row = 0; row < 8; row++) {
@@ -80,8 +65,7 @@ for (let row0 = 5; row0 < 8; row0++) {
 				this.grid[row].push(null);
 			}
 		}
-  }
-
+	}
 	viewGrid() {
 		// add our column numbers
 		let string = "  0 1 2 3 4 5 6 7\n";
@@ -93,63 +77,47 @@ for (let row0 = 5; row0 < 8; row0++) {
 				// if the location is "truthy" (contains a checker piece, in this case)
 				if (this.grid[row][column]) {
 					// push the symbol of the check in that location into the array
-					rowOfCheckers.push(this.grid[row][column].symbol);
+					rowOfCheckers.push(this.grid[row][column]);
 				} else {
 					// just push in a blank space
 					rowOfCheckers.push(" ");
-        }
-      }
+				}
+			}
 			// join the rowOfCheckers array to a string, separated by a space
 			string += rowOfCheckers.join(" ");
 			// add a 'new line'
 			string += "\n";
 		}
-		console.log(string); 
+		console.log(string);
+	}
 }
-
-  // ValidInput(whichPiece, toWhere) {
-  //   let start = whichPiece.split('');
-  //   let end = toWhere.split('');
-  //   let startX = start[0];
-  //   let startY = start[1];
-  //   let endX = end[0];
-  //   let endY = end[1];
-
-  //   const is0to7 = () => {
-  //     if (((startX || endX || startY || endY) <=7) && ((startX || endX || startY || endY) >= 0)) {
-  //       return true;
-  //     };
-  //   }
-  //   const isInputOdd = () => {
-  //     if ((startX + startY) && (endX + endY) %2 !== 0) {
-  //       return true;
-  //     };
-  //   }
-  //   const isEmpty = () => {
-  //     if (this.board.grid[endX][endY] === null) {
-  //       return true;
-  //     };
-  //   }
-  //   return is0to7 && isInputOdd(whichPiece) && isInputOdd(toWhere) && isEmpty(whichPiece) && !isEmpty(toWhere);
-  // }
-}
+// Your code here
 
 class Game {
 	constructor() {
-    this.board = new Board();
-    
+		this.board = new Board();
 	}
 	start() {
 		this.board.createGrid();
 		this.board.initializeGrid();
-  }
-  
-moveChecker(whichPiece, toWhere){
-this.board.grid[whichPiece[0]][whichPiece[1]] = null;
-this.board.grid[toWhere[0]][toWhere[1]] = playerTurn;
-switchPlayer();
+	}
+	moveChecker(start, end) {
+		const startX = parseInt(start[0]);
+		const startY = parseInt(start[1]);
+		const endX = parseInt(end[0]);
+		const endY = parseInt(end[1]);
+
+		const checker = this.board.selectChecker(start[0], start[1]);
+
+		this.board.grid[endX][endY] = checker;
+		this.board.grid[startX][startY] = null;
+
+		if (Math.sqrt((endX - startX) ^ (2 + (endY - startY)) ^ 2) >= 2) {
+			this.board.killChecker([(endX + startX) / 2, (endY + startY) / 2]);
+		}
+	}
 }
-}
+
 function getPrompt() {
 	game.board.viewGrid();
 	rl.question("which piece?: ", whichPiece => {
