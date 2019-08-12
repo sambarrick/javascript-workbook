@@ -80,13 +80,13 @@ const listPeopleChoices = () => {
   const listElement = document.getElementById("people");
   listElement.innerHTML = "";
   arrOfPeople
-    .filter(person => !person.isPlayer)
-    .map(person => {
+    .filter(person => !person.isPlayer) // filters if a person is a player or not(none of them are yet). Once you click the Make Player button below, it identifies the person as a player and not a non-player, therefore taking the person off of the original list and populating them into the "players" list
+    .map(person => { 
       const li = document.createElement("li");
       const button = document.createElement("button");
       button.innerHTML = "Make a Player";
       button.addEventListener("click", function() {
-        makePlayer(person.id);
+        makePlayer(person.id); //makes a player once the "Make Player" button is clicked
       });
       li.appendChild(button);
       li.appendChild(
@@ -96,11 +96,11 @@ const listPeopleChoices = () => {
     });
 };
 
-function makePlayer(id, skillSet) {
+function makePlayer(id, skillSet) { //this function is what actually makes the player
   arrOfPeople.forEach((person, index) => {
     if (person.id === id) {
       let newplayer = new Player(person);
-      listofPlayers.push(newplayer);
+      listofPlayers.push(newplayer); //pushes selected player from list of players into a new array
       newplayer.isPlayer = true;
       arrOfPeople.splice(index, 1);
       listPlayer();
